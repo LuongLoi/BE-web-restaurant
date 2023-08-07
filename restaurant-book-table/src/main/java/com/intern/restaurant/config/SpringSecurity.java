@@ -92,6 +92,9 @@ public class SpringSecurity {
                         
                         auth.requestMatchers("/book-table/create/**").hasRole("USER");
                         auth.requestMatchers("/book-table/list/**").hasRole("ADMIN");
+                        auth.requestMatchers("/book-table/by/**").hasRole("ADMIN");
+                        auth.requestMatchers("/book-table/update/**").hasRole("ADMIN");
+                        auth.requestMatchers("/book-table/delete/**").hasAnyRole("ADMIN","USER");
     					//auth.anyRequest().authenticated();
     				})
     				.formLogin(
