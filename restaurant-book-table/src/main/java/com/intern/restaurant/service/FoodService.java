@@ -19,7 +19,8 @@ public interface FoodService {
 	public boolean updateCf_id(String fd_name, int cf_id);
 	public boolean updateFood(String fd_name,Food updateFood);
 	
-	public void deleteByName(String fd_name);
+//	public void deleteByName(String fd_name);
+	public void deleteById(int id);
 	
 	
 }

@@ -71,6 +71,9 @@ public class SpringSecurity {
                         auth.requestMatchers("/food/update/**").hasRole("ADMIN");
                         auth.requestMatchers("/food/delete/**").hasRole("ADMIN");
                         
+                        auth.requestMatchers("food/list/admin/").hasRole("ADMIN");
+                        auth.requestMatchers("/food/list/user/").hasRole("USER");
+                        
                         auth.requestMatchers("/category/create/**").hasRole("ADMIN");
                         auth.requestMatchers("/category/list/**").permitAll();
                         auth.requestMatchers("/category/update/**").hasRole("ADMIN");
@@ -92,7 +95,9 @@ public class SpringSecurity {
                         
                         auth.requestMatchers("/book-table/create/**").hasRole("USER");
                         auth.requestMatchers("/book-table/list/**").hasRole("ADMIN");
-    					//auth.anyRequest().authenticated();
+    					
+                        auth.requestMatchers("/admin_page/**").hasRole("ADMIN");
+                        //auth.anyRequest().authenticated();
     				})
     				.formLogin(
     					    form -> form
@@ -100,9 +105,9 @@ public class SpringSecurity {
     					        .loginProcessingUrl("/login")
     					        .successHandler((request, response, authentication) -> {
     					            if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
-    					                response.sendRedirect("/listusers/");
+    					                response.sendRedirect("/admin_page/");
     					            } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
-    					                response.sendRedirect("/food/listfood/");
+    					                response.sendRedirect("/food/list/user/");
     					            } else {
     					                throw new IllegalStateException("Unhandled role");
     					            }

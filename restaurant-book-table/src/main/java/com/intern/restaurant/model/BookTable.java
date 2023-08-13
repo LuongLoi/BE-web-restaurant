@@ -35,9 +35,9 @@ public class BookTable {
 	@Column(name = "bt_note")
 	private String note;
 	
-	@ManyToOne
-	@JoinColumn(name = "fd_id")
-	private Food food;
+//	@ManyToOne
+//	@JoinColumn(name = "fd_id")
+//	private Food food;
 	
 	@ManyToOne
 	@JoinColumn(name = "us_id")

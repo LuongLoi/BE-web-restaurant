@@ -40,6 +40,7 @@ public class FoodServiceImpl implements FoodService {
 	public Food createFood(Food food) {
 		// TODO Auto-generated method stub
 		food.setUser(new User(userService.getCurrentUserLogin()));
+		food.setCategory(new Category(1));
 		Optional<Food> o_food = foodRepository.findByName(food.getName());
 		
 		if (o_food.isPresent())
@@ -151,16 +152,23 @@ public class FoodServiceImpl implements FoodService {
 		return false;
 	}
 
+//	@Override
+//	public void deleteByName(String fd_name) {
+//		// TODO Auto-generated method stub
+//		Optional<Food> o_food = foodRepository.findByName(fd_name);
+//		if (!o_food.isPresent())
+//			throw new FoodException("Food is not found");
+//		int fd_id = o_food.get().getFd_id();
+//		foodRepository.deleteById(fd_id);
+//	}
+
 	@Override
-	public void deleteByName(String fd_name) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
+	public void deleteById(int id) {
+		Optional<Food> o_food = foodRepository.findById(id);
 		if (!o_food.isPresent())
 			throw new FoodException("Food is not found");
-		int fd_id = o_food.get().getFd_id();
-		foodRepository.deleteById(fd_id);
+		foodRepository.deleteById(id);
 	}
-
 	
 	
 }

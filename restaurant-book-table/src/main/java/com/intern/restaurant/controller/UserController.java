@@ -19,6 +19,11 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
+	@GetMapping("/admin_page/")
+	public String showAdminPage() {
+		return "admin_page";
+	}
+	
 	@GetMapping("/users/")
 	public String listUsers(Model model) {
 	    List<UserDTO> listUsers = userService.getAllUser();

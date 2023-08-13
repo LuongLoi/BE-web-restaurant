@@ -1,9 +1,0 @@
-package com.intern.restaurant.repository;
-
-import org.springframework.data.jpa.repository.JpaRepository;
-
-import com.intern.restaurant.model.Food;
-
-public interface FoodRepository extends JpaRepository<Food, Integer> {
-
-}

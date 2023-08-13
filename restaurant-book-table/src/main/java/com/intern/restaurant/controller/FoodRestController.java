@@ -68,8 +68,8 @@ public class FoodRestController {
 		return ResponseEntity.ok(foodService.updateFood(name, updateFood));
 	}
 	
-	@DeleteMapping("/delete/{name}")
-	public void deleteByName(@PathVariable String name) {
-		foodService.deleteByName(name);
-	}
+//	@DeleteMapping("/delete/{name}")
+//	public void deleteByName(@PathVariable String name) {
+//		foodService.deleteByName(name);
+//	}
 }
