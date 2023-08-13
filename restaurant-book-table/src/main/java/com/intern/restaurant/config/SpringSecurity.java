@@ -13,7 +13,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -38,27 +37,6 @@ public class SpringSecurity {
     
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-//        return http.csrf((csrf) -> csrf.disable())
-//                .authorizeHttpRequests((authorize) -> {
-//                	authorize.requestMatchers("/index").permitAll();
-//                    authorize.requestMatchers("/register/**").permitAll();
-//                    authorize.requestMatchers("/users/**").hasRole("ADMIN");
-//                    authorize.requestMatchers("/delete/**").hasRole("ADMIN");
-//                    authorize.requestMatchers("/food/create/**").permitAll();
-//                    authorize.requestMatchers("/food/listfood/**").permitAll();
-//                    authorize.anyRequest().authenticated();
-//				}).formLogin(
-//                        form -> form
-//                                .loginPage("/login")
-//                                .loginProcessingUrl("/login")
-//                                .defaultSuccessUrl("/users")
-//                                .permitAll()
-//                ).logout(
-//                        logout -> logout
-//                                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-//                                .permitAll()
-//                ).httpBasic(withDefaults())
-//               .build();
     	return http.csrf(csrf -> csrf.disable())
     				.authorizeHttpRequests(auth -> {
     					auth.requestMatchers("/index").permitAll();
@@ -67,10 +45,8 @@ public class SpringSecurity {
     					auth.requestMatchers("/register/**").permitAll();
     					
     					auth.requestMatchers("/food/create/**").hasRole("ADMIN");
-                        auth.requestMatchers("/food/listfood/**").permitAll();
                         auth.requestMatchers("/food/update/**").hasRole("ADMIN");
                         auth.requestMatchers("/food/delete/**").hasRole("ADMIN");
-                        
                         auth.requestMatchers("food/list/admin/").hasRole("ADMIN");
                         auth.requestMatchers("/food/list/user/").hasRole("USER");
                         

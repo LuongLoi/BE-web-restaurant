@@ -3,21 +3,18 @@ package com.intern.restaurant.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.intern.restaurant.dto.FoodDTO;
 import com.intern.restaurant.model.Food;
-import com.intern.restaurant.model.User;
 import com.intern.restaurant.service.FoodService;
 
 @Controller
@@ -29,10 +26,10 @@ public class FoodController {
 	private FoodService foodService;
 	
 	@GetMapping("/create/")
-	public String showRegistrationForm(Model model) {
+	public String showFoodForm(Model model) {
 	    model.addAttribute("food", new Food());
 	     
-	    return "food_form";
+	    return "food_form_add";
 	}
 	
 	@PostMapping("/create/save/")
@@ -46,7 +43,7 @@ public class FoodController {
 	public String listFoodUser(Model model) {
 		List<FoodDTO> listFoodDto = foodService.getListFood();
 		model.addAttribute("listFoodDto", listFoodDto);
-		return "listfoods";
+		return "food_list";
 	}
 	
 	@GetMapping("/list/admin/")
@@ -54,7 +51,7 @@ public class FoodController {
 	public String listFoodAdmin(Model model) {
 		List<FoodDTO> listFoodDto = foodService.getListFood();
 		model.addAttribute("listFoodDto", listFoodDto);
-		return "listfoodadmin";
+		return "food_list_admin";
 	}
 	
 	@GetMapping("/delete/{id}")
@@ -62,4 +59,19 @@ public class FoodController {
         foodService.deleteById(id);
         return "redirect:/food/list/admin/";
     }
+	
+	@GetMapping("/update/{id}")
+	public String showFoodUpdateForm(@PathVariable int id, Model model) {
+	    Food foodUpdate = foodService.getById(id);
+		
+		model.addAttribute("foodupdate", foodUpdate);
+	     
+	    return "food_form_update";
+	}
+	
+	@PostMapping("/update/save/")
+	public String foodUpdate(@ModelAttribute Food food) {
+		foodService.updateFood(food);
+		return "redirect:/food/list/admin/";
+	}
 }

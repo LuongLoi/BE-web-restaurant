@@ -41,6 +41,7 @@
                 <th>Description</th>
                 <th>Youtube-Link</th>
                 <th>Price</th>
+                <th>Category ID</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -51,9 +52,10 @@
                 <td th:text = "${foodDto.description}"></td>
                 <td th:text = "${foodDto.youtube_link}"></td>
                 <td th:text = "${foodDto.price}"></td>
+                <td th:text = "${foodDto.cf_id}"></td>
                 <td>
-                    <a th:href="@{/food/update/{name}(name=${foodDto.name})}" class="btn btn-primary">Update</a>
-                    <a th:href="@{/food/delete/{name}(name=${foodDto.name})}" class="btn btn-danger">Delete</a>
+                    <a th:href="@{/food/update/{id}(id=${foodDto.id})}" class="btn btn-primary">Update</a>
+                    <a th:href="@{/food/delete/{id}(id=${foodDto.id})}" class="btn btn-danger">Delete</a>
                 </td>
             </tr>
         </tbody>

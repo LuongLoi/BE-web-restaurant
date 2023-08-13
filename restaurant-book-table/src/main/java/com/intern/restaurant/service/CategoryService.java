@@ -9,13 +9,7 @@ import com.intern.restaurant.model.Category;
 public interface CategoryService {
 	public List<CategoryDTO> listCategory();
 	public Category createCategory(Category category); 
-	
-	public boolean updateCategoryName(String name, String newname);
-	public boolean updateCategoryDescription(String name, String description);
-	public boolean updateCategoryImageLink(String name, String img_link);
-	public boolean updateCategoryType(String name, int type);
-	public boolean updateCategory(String name, Category updateCategory);
-	
+	public void updateCategory(Category updateCategory);
 	public void deleteById(int id);
-	public void deleteByName(String name);
+	public Category getById(int cf_id);
 }

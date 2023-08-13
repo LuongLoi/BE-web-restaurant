@@ -15,4 +15,5 @@ public interface PostService {
 	public boolean updatePublished(int id, int published);
 	
 	public void deleteById(int id);
+	public void deleteAllByCategoryId(int cf_id);
 }

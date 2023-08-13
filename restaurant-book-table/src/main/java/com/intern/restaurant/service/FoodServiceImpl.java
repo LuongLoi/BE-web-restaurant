@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.intern.restaurant.dto.CategoryDTO;
 import com.intern.restaurant.dto.FoodDTO;
 import com.intern.restaurant.exception.FoodException;
 import com.intern.restaurant.exception.FoodNotFoundException;
@@ -40,7 +41,7 @@ public class FoodServiceImpl implements FoodService {
 	public Food createFood(Food food) {
 		// TODO Auto-generated method stub
 		food.setUser(new User(userService.getCurrentUserLogin()));
-		food.setCategory(new Category(1));
+		food.setCategory(new Category(food.getCategory().getCf_id()));
 		Optional<Food> o_food = foodRepository.findByName(food.getName());
 		
 		if (o_food.isPresent())
@@ -50,125 +51,48 @@ public class FoodServiceImpl implements FoodService {
 	}
 
 	@Override
-	public boolean updateName(String fd_name, String newname) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setName(newname);
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateThumbnail(String fd_name, String thumbnail) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setThumbnail(thumbnail);
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updatePrice(String fd_name, int price) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setPrice(price);
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateDescription(String fd_name, String description) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setDescription(description);
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateYoutubeLink(String fd_name, String youtube_link) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setYoutube_link(youtube_link);
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateCf_id(String fd_name, int cf_id) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setCategory(new Category(cf_id));
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-	@Override
-	public boolean updateFood(String fd_name,Food updateFood) {
-		// TODO Auto-generated method stub
-		Optional<Food> o_food = foodRepository.findByName(fd_name);
-		if (o_food.isPresent()) {
-			Food food = o_food.get();
-			food.setUser(new User(userService.getCurrentUserLogin()));
-			food.setCategory(new Category(updateFood.getCategory().getCf_id()));
-			food.setName(updateFood.getName());
-			food.setDescription(updateFood.getDescription());
-			food.setPrice(updateFood.getPrice());
-			food.setThumbnail(updateFood.getThumbnail());
-			food.setYoutube_link(updateFood.getYoutube_link());
-			foodRepository.save(food);
-			return true;
-		}
-		return false;
-	}
-
-//	@Override
-//	public void deleteByName(String fd_name) {
-//		// TODO Auto-generated method stub
-//		Optional<Food> o_food = foodRepository.findByName(fd_name);
-//		if (!o_food.isPresent())
-//			throw new FoodException("Food is not found");
-//		int fd_id = o_food.get().getFd_id();
-//		foodRepository.deleteById(fd_id);
-//	}
-
-	@Override
 	public void deleteById(int id) {
 		Optional<Food> o_food = foodRepository.findById(id);
 		if (!o_food.isPresent())
 			throw new FoodException("Food is not found");
 		foodRepository.deleteById(id);
 	}
+	
+	@Override
+	public void deleteAllByCategoryId(int cf_id) {
+		for (Food food : foodRepository.findAll()) {
+			if (food.getCategory().getCf_id() == cf_id) {
+				foodRepository.deleteById(food.getFd_id());
+			}
+		}
+	}
+
+	@Override
+	public void updateFood(Food updateFood) {
+		// TODO Auto-generated method stub
+		Optional<Food> o_food = foodRepository.findById(updateFood.getFd_id());
+		if (o_food.isPresent()) {
+			Food food = o_food.get();
+			food.setFd_id(updateFood.getFd_id());
+			food.setUser(new User(userService.getCurrentUserLogin()));
+//			food.setCategory(new Category(updateFood.getCategory().getCf_id()));
+			food.setCategory(updateFood.getCategory());
+			food.setName(updateFood.getName());
+			food.setDescription(updateFood.getDescription());
+			food.setPrice(updateFood.getPrice());
+			food.setThumbnail(updateFood.getThumbnail());
+			food.setYoutube_link(updateFood.getYoutube_link());
+			foodRepository.save(food);
+		} 
+	}
+	
+	public Food getById(int fd_id) {
+		Optional<Food> o_food = foodRepository.findById(fd_id);
+		if (!o_food.isPresent())
+			throw new FoodException("Food not found");
+		return o_food.get();
+	}
+	
 	
 	
 }

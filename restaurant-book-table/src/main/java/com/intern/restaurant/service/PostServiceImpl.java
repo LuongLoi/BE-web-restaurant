@@ -108,4 +108,15 @@ public class PostServiceImpl implements PostService {
 		}
 	}
 
+	@Override
+	public void deleteAllByCategoryId(int cf_id) {
+		// TODO Auto-generated method stub
+		for (Post post : postRepository.findAll()) {
+			if (post.getCategory().getCf_id() == cf_id) {
+				postRepository.deleteById(post.getPs_id());
+			}
+		}
+		
+	}
+
 }

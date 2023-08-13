@@ -11,7 +11,6 @@ public class BookTableMapper {
 		bookTableDto.setDatetime(bookTable.getDatetime());
 		bookTableDto.setNote(bookTable.getNote());
 		bookTableDto.setNumberPeople(bookTable.getNumberPeople());
-//		bookTableDto.setFd_id(bookTable.getFood().getFd_id());
 		bookTableDto.setUs_id(bookTable.getUser().getUs_id());
 		return bookTableDto;
 	}

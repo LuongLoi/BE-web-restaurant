@@ -18,6 +18,5 @@ public class BookTableDTO {
 	private LocalDateTime datetime;
 	private int numberPeople;
 	private String note;
-//	private int fd_id;
 	private int us_id;
 }
