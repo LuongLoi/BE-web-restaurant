@@ -1,7 +1,11 @@
 package com.intern.restaurant.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,21 +16,18 @@ import org.springframework.web.bind.annotation.RestController;
 import com.intern.restaurant.model.BookTable;
 import com.intern.restaurant.service.BookTableService;
 
-@RestController
-@RequestMapping("/book-table")
+@Controller
+@RequestMapping("/booking")
 @CrossOrigin("*")
 public class BookTableController {
 
 	@Autowired
 	private BookTableService bookTableService;
 	
-	@PostMapping("/create/")
-	public ResponseEntity<?> createBookTable(@RequestBody BookTable bookTable) {
-		return ResponseEntity.ok(bookTableService.createBookTable(bookTable));
-	}
-	
 	@GetMapping("/list/")
-	public ResponseEntity<?> listBookTable() {
-		return ResponseEntity.ok(bookTableService.listBookTable());
+	public String listBookTable(Model model) {
+		List<BookTable> listBooking = bookTableService.listBookTable();
+		model.addAttribute("listBooking", listBooking);
+		return "booking_list";
 	}
 }

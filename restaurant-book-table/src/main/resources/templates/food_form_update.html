@@ -50,6 +50,7 @@
                       placeholder="Enter foodid"
                       th:field="*{fd_id}"
                       type="number"
+                      readonly
               />
               <p th:errors = "*{fd_id}" class="text-danger"
               th:if="${#fields.hasErrors('fd_id')}"></p>
@@ -99,14 +100,14 @@
 
             <div class="form-group mb-3">
               <label class="form-label">Description</label>
-              <input
+              <textarea
                       class="form-control"
                       id="description"
                       name="description"
                       placeholder="Enter description"
                       th:field="*{description}"
                       type="text"
-              />
+              ></textarea>
               <p th:errors = "*{description}" class="text-danger"
                  th:if="${#fields.hasErrors('description')}"></p>
             </div>
@@ -127,14 +128,20 @@
             
             <div class="form-group mb-3">
               <label class="form-label">Category ID</label>
-              <input
+              <!--<input
                       class="form-control"
                       id="category"
                       name="category"
                       placeholder="Enter categoty id"
                       th:field="*{category.cf_id}"
                       type="number"
-              />
+              />-->
+              <select id="category" th:field="*{category}" class="form-control">
+            		
+            		<option th:each="category : ${listCategories}"
+                    		th:value="${category.id}"
+                    		th:text="${category.name}"></option>
+        	</select>
               <p th:errors = "*{category}" class="text-danger"
                  th:if="${#fields.hasErrors('category')}"></p>
             </div> 

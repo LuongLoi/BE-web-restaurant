@@ -8,5 +8,6 @@ import com.intern.restaurant.model.BookTable;
 public interface BookTableService {
 	
 	public BookTable createBookTable(BookTable bookTable);
-	public List<BookTableDTO> listBookTable();
+	public List<BookTableDTO> listBookTableDTO();
+	public List<BookTable> listBookTable();
 }

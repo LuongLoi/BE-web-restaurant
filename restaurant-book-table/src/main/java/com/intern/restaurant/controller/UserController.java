@@ -24,6 +24,11 @@ public class UserController {
 		return "admin_page";
 	}
 	
+	@GetMapping("/home/")
+	public String showHomePage() {
+		return "home";
+	}
+	
 	@GetMapping("/users/")
 	public String listUsers(Model model) {
 	    List<UserDTO> listUsers = userService.getAllUser();

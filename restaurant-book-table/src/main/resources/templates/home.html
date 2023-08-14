@@ -188,37 +188,22 @@
                         <a class="nav-link"  aria-current="page" th:href="@{/food/list/user/}">Thực đơn</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link"  href="#About">Về chúng tôi</a>
-                    </li>
-                    <li class="nav-item">
                         <a class="nav-link" href="#footer">Liên hệ</a>
                     </li>
+                    
+                    <li class="nav-item">
+                    	<a class="nav-link active" aria-current="page" th:href="@{/logout}">Logout</a>
+                	</li>
                 </ul>
             </div>
         </div>
     </nav>
+<body>
 
-
-<!--<div class="container">
-    <div class="row">
-        <h1 class="text-center"> Welcome to Registration and Login System </h1>
-    </div>
-</div>-->
-
-	<div class="container">
-        <div class="row">
-            <div class="col-md-6 offset-md-3 text-center">
-                <div class="mt-4">
-                    <a href="login.html" class="btn btn-primary btn-lg">Đăng nhập</a>
-                    <a th:href="@{/register}" class="btn btn-outline-primary btn-lg">Đăng ký</a>
-                </div>
-            </div>
-        </div>
-    </div>
     <div class="jumbotron">
         <h1>Chào mừng bạn đến với Ẩm Thực Tươi Ngon</h1>
         <p>Điểm đến lý tưởng cho những món ăn ngon miệng</p>
-        <a href="food_list.html" class="btn btn-lg btn-danger">Khám phá Thực đơn</a>
+        <a th:href="@{/food/list/user/}" class="btn btn-lg btn-danger">Khám phá Thực đơn</a>
     </div>
 
     <div class="container">
@@ -246,52 +231,8 @@
             </div>
         </div>
     </div>
-    
-    
-     <div class="about" id="About">
-        
-        <h1>sơ lược về nhà hàng</h1>
-
-        <div class="about_main">
-            <div class="about_image">
-                <div class="about_small_image">
-                    <img th:src="@{https://cdn.tgdd.vn/2021/10/CookDish/huong-dan-chi-tiet-cach-nau-sup-ga-tai-nha-ngon-avt-1200x676.jpg}" onclick="functio(this)">
-                    <img th:src="@{https://cdn.tgdd.vn/2020/06/CookRecipe/Avatar/sup-khoai-tay-thumbnail-1.jpg}" onclick="functio(this)">
-                    <img th:src="@{https://cdn.tgdd.vn/Files/2021/03/13/1334991/tong-hop-15-mon-rau-xao-gion-ngon-thanh-mat-va-bo-duong-cho-ca-gia-dinh-202103131753278116.jpg}" onclick="functio(this)">
-                    <img th:src="@{https://cdn.tgdd.vn/Files/2021/03/13/1334991/tong-hop-15-mon-rau-xao-gion-ngon-thanh-mat-va-bo-duong-cho-ca-gia-dinh-202103131758316989.jpg}" onclick="functio(this)">
-                </div>
-
-                <div class="image_contaner">
-                    <img th:src="@{https://cdn.tgdd.vn/2021/10/CookDish/huong-dan-chi-tiet-cach-nau-sup-ga-tai-nha-ngon-avt-1200x676.jpg}" id="imagebox">
-                </div>
-
-            </div>
-
-            <div class="about_text">
-                <p>
-                    Ẩm thực tươi ngon là nhà hàng có lịch sử lâu đời 
-                    với các món dân dã của người dân Việt Nam
-                </p>
-            </div>
-
-        </div>
-
-
-        <script>
-            function functio(small){
-                var full = document.getElementById("imagebox")
-                full.src = small.src
-            }
-        </script>
-        
-    </div>
-
     <div class="footer" id="footer">
         <p>&copy; 2023 Ẩm Thực Tươi Ngon. Bảo lưu mọi quyền.</p>
     </div>
-
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>

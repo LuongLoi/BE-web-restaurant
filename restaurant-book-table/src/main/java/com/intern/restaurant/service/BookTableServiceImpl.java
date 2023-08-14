@@ -33,7 +33,7 @@ public class BookTableServiceImpl implements BookTableService{
 	}
 
 	@Override
-	public List<BookTableDTO> listBookTable() {
+	public List<BookTableDTO> listBookTableDTO() {
 		// TODO Auto-generated method stub
 		List<BookTableDTO> listDto = new ArrayList<>();
 		for (BookTable bookTable: bookTableRepository.findAll()) {
@@ -42,6 +42,15 @@ public class BookTableServiceImpl implements BookTableService{
 		if (listDto.size() == 0)
 			throw new BookTableException("Book-Table is not found");
 		return listDto;
+	}
+
+	@Override
+	public List<BookTable> listBookTable() {
+		// TODO Auto-generated method stub
+		List<BookTable> listBooking = bookTableRepository.findAll();
+		if (listBooking.size() == 0)
+			throw new BookTableException("List Booking is empty");
+		return listBooking;
 	}
 
 }

@@ -40,6 +40,7 @@ public class SpringSecurity {
     	return http.csrf(csrf -> csrf.disable())
     				.authorizeHttpRequests(auth -> {
     					auth.requestMatchers("/index").permitAll();
+    					auth.requestMatchers("/home/").permitAll();
     					auth.requestMatchers("/listusers/**").hasRole("ADMIN");
     					auth.requestMatchers("/update-role/**").hasRole("ADMIN");
     					auth.requestMatchers("/register/**").permitAll();
@@ -48,7 +49,7 @@ public class SpringSecurity {
                         auth.requestMatchers("/food/update/**").hasRole("ADMIN");
                         auth.requestMatchers("/food/delete/**").hasRole("ADMIN");
                         auth.requestMatchers("food/list/admin/").hasRole("ADMIN");
-                        auth.requestMatchers("/food/list/user/").hasRole("USER");
+                        auth.requestMatchers("/food/list/user/").permitAll();
                         
                         auth.requestMatchers("/category/create/**").hasRole("ADMIN");
                         auth.requestMatchers("/category/list/**").permitAll();
@@ -70,7 +71,7 @@ public class SpringSecurity {
                         auth.requestMatchers("/image/delete/**").hasRole("ADMIN");
                         
                         auth.requestMatchers("/book-table/create/**").hasRole("USER");
-                        auth.requestMatchers("/book-table/list/**").hasRole("ADMIN");
+                        auth.requestMatchers("/booking/list/**").hasRole("ADMIN");
     					
                         auth.requestMatchers("/admin_page/**").hasRole("ADMIN");
                         //auth.anyRequest().authenticated();
@@ -83,7 +84,7 @@ public class SpringSecurity {
     					            if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"))) {
     					                response.sendRedirect("/admin_page/");
     					            } else if (authentication.getAuthorities().stream().anyMatch(a -> a.getAuthority().equals("ROLE_USER"))) {
-    					                response.sendRedirect("/food/list/user/");
+    					                response.sendRedirect("/home/");
     					            } else {
     					                throw new IllegalStateException("Unhandled role");
     					            }

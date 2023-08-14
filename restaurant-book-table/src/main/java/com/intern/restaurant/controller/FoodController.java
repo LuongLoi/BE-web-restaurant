@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.intern.restaurant.dto.CategoryDTO;
 import com.intern.restaurant.dto.FoodDTO;
 import com.intern.restaurant.model.Food;
+import com.intern.restaurant.service.CategoryService;
 import com.intern.restaurant.service.FoodService;
 
 @Controller
@@ -25,8 +27,13 @@ public class FoodController {
 	@Autowired
 	private FoodService foodService;
 	
+	@Autowired
+	private CategoryService categoryService;
+	
 	@GetMapping("/create/")
 	public String showFoodForm(Model model) {
+		List<CategoryDTO> listCategoryDto = categoryService.listCategory();
+		model.addAttribute("listCategories", listCategoryDto);
 	    model.addAttribute("food", new Food());
 	     
 	    return "food_form_add";
@@ -65,6 +72,9 @@ public class FoodController {
 	    Food foodUpdate = foodService.getById(id);
 		
 		model.addAttribute("foodupdate", foodUpdate);
+		
+		List<CategoryDTO> listCategoryDto = categoryService.listCategory();
+		model.addAttribute("listCategories", listCategoryDto);
 	     
 	    return "food_form_update";
 	}
