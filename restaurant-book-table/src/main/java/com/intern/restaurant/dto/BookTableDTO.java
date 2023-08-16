@@ -1,9 +1,8 @@
 package com.intern.restaurant.dto;
 
+
 import java.time.LocalDateTime;
 
-import com.intern.restaurant.model.Food;
-import com.intern.restaurant.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

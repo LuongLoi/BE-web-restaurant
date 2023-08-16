@@ -72,6 +72,7 @@ public class SpringSecurity {
                         
                         auth.requestMatchers("/book-table/create/**").hasRole("USER");
                         auth.requestMatchers("/booking/list/**").hasRole("ADMIN");
+                        auth.requestMatchers("/booking/create/**").hasRole("USER");
     					
                         auth.requestMatchers("/admin_page/**").hasRole("ADMIN");
                         //auth.anyRequest().authenticated();

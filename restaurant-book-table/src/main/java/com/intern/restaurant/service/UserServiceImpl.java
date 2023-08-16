@@ -44,7 +44,9 @@ public class UserServiceImpl implements UserService{
 		Optional<User> existingEmail = userRepository.findByEmail(user.getEmail());
 		Optional<User> existingUsername = userRepository.findByUsername(user.getUsername());
 
-		if(existingMobile.isPresent() || existingEmail.isPresent() || existingUsername.isPresent())
+		if(existingMobile.isPresent() 
+				|| existingEmail.isPresent() 
+				|| existingUsername.isPresent())
 			throw new UserException("User already exists");
 		return userRepository.save(user);
 	}

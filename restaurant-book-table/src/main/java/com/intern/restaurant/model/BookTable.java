@@ -38,4 +38,5 @@ public class BookTable {
 	@ManyToOne
 	@JoinColumn(name = "us_id")
 	private User user;
+
 }

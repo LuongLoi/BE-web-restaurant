@@ -1,6 +1,5 @@
 package com.intern.restaurant.service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,6 @@ public class BookTableServiceImpl implements BookTableService{
 		// TODO Auto-generated method stub
 		int us_id = userService.getCurrentUserLogin();
 		bookTable.setUser(new User(us_id));
-		bookTable.setDatetime(LocalDateTime.now());
 		return bookTableRepository.save(bookTable);
 	}
 
